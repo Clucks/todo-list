@@ -1,4 +1,4 @@
-import { Element } from "./classes";
+import { Element,Projects } from "./classes";
 //Loads the inital dom of the todo list
 export const initialdom = () => {
     const content = document.querySelector('#content');
@@ -22,8 +22,15 @@ export const initialdom = () => {
             .setTextContent("Projects"))
         .addChild(new Element('button')
             .setTextContent("Add new project")
-                .appendEventListener("click", function(){
+                .appendEventListener("click", function(event){
                 //Should create a new todo in the project
+                    //ask for the name of the project
+                    const name = prompt("What is the name of the new project?");
+
+                    //makes the project object
+                    const project = new Projects();
+
+                    //uploads the project to the dom
 
                 })) 
         .addChild(new Element('div'))

@@ -1,27 +1,49 @@
+class Projects {
+  constructor(name) {
+    this.niame = name;
+    this.Todos = [];
+  }
 
-class todo{
-    constructor(priority, title, description, date){
-        this.priority = priority;
-        this.title = title;
-        this.description = description;
-        this.date = date;
-    }
+  appendToDo(todo) {
+    this.Todos.push(todo);
+  }
 
-    get priority(){
-        return this.priority;
-    }
+  //Should create a new todo in the project
+  buildProject() {
+    //ask for the name of the project
+    const name = prompt("What is the name of the new project?");
 
-    get title(){
-        return this.title;
-    }
-    
-    get description(){
-        return this.description;
-    }
+    //makes the project object
+    const project = new Projects(name);
 
-    get date(){
-        return this.date;
-    }
+    //uploads the project to the dom
+  }
+
+
+}
+class Todo {
+  constructor(priority, title, description, date) {
+    this.priority = priority;
+    this.title = title;
+    this.description = description;
+    this.date = date;
+  }
+
+  get priority() {
+    return this.priority;
+  }
+
+  get title() {
+    return this.title;
+  }
+
+  get description() {
+    return this.description;
+  }
+
+  get date() {
+    return this.date;
+  }
 }
 
 export class Element {
@@ -39,7 +61,7 @@ export class Element {
     // Add attributes to element
     for (const attribute in this.attributes) {
       if (this.attributes[attribute] === true ||
-         this.attributes[attribute] === false) {
+        this.attributes[attribute] === false) {
         realDom.toggleAttribute(attribute, this.attributes[attribute]);
       } else {
         realDom.setAttribute(attribute, this.attributes[attribute]);
