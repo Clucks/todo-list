@@ -3,5 +3,5 @@ export const loadpage = () => {
     const div = document.createElement('div');
     div.setAttribute('id', 'page-content');
 
-
+    
 }

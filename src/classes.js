@@ -34,14 +34,12 @@ export class Element {
 
   buildElement() {
     // Create element in DOM
-    const realBoi = document.createElement(this.elementType);
+    const realDom = document.createElement(this.elementType);
 
     // Add attributes to element
     for (const attribute in this.attributes) {
-      if (
-        this.attributes[attribute] === true ||
-        this.attributes[attribute] === false
-      ) {
+      if (this.attributes[attribute] === true ||
+         this.attributes[attribute] === false) {
         realBoi.toggleAttribute(attribute, this.attributes[attribute]);
       } else {
         realBoi.setAttribute(attribute, this.attributes[attribute]);
@@ -49,22 +47,22 @@ export class Element {
     }
 
     // Add event listeners:
-    for (const ev in this.eventListeners) {
-      this.eventListeners[ev].forEach((cb) => {
-        realBoi.addEventListener(ev, cb);
+    for (const event in this.eventListeners) {
+      this.eventListeners[event].forEach((cb) => {
+        realBoi.addEventListener(event, cb);
       });
     }
 
     // Append children? Append text?
     if (this.text === undefined) {
-      for (const virtualBoi of this.children) {
-        realBoi.appendChild(virtualBoi.buildElement());
+      for (const child of this.children) {
+        realBoi.appendChild(child.buildElement());
       }
     } else {
       const realText = document.createTextNode(this.text);
-      realBoi.appendChild(realText);
+      realDom.appendChild(realText);
     }
-    return realBoi;
+    return realDom;
   }
 
   setAttributes(object) {
