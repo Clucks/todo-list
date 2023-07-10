@@ -40,23 +40,23 @@ export class Element {
     for (const attribute in this.attributes) {
       if (this.attributes[attribute] === true ||
          this.attributes[attribute] === false) {
-        realBoi.toggleAttribute(attribute, this.attributes[attribute]);
+        realDom.toggleAttribute(attribute, this.attributes[attribute]);
       } else {
-        realBoi.setAttribute(attribute, this.attributes[attribute]);
+        realDom.setAttribute(attribute, this.attributes[attribute]);
       }
     }
 
     // Add event listeners:
     for (const event in this.eventListeners) {
       this.eventListeners[event].forEach((cb) => {
-        realBoi.addEventListener(event, cb);
+        realDom.addEventListener(event, cb);
       });
     }
 
     // Append children? Append text?
     if (this.text === undefined) {
       for (const child of this.children) {
-        realBoi.appendChild(child.buildElement());
+        realDom.appendChild(child.buildElement());
       }
     } else {
       const realText = document.createTextNode(this.text);

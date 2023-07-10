@@ -1,3 +1,3 @@
-import { loagpage } from './loadpage.js'
+import { loadpage } from './loadpage.js'
 
 loadpage();

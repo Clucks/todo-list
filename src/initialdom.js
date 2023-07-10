@@ -5,8 +5,13 @@ export const initialdom = () => {
 
     const header = new Element('div');
     header
-        .setAttributes("#header")
-        .addChild(new Element("img"))
+        .setAttributes({id: "header"})
+        .addChild(new Element('span')
+            .setAttributes({id: "logo"}))
+        .addChild(new Element('span')
+            .setTextContent('When2do')
+            .setAttributes({id: "title"}))
+
     const headerdom = header.buildElement(); 
     content.appendChild(headerdom);
     

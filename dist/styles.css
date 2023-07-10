@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+#header {
+    display: grid;
+    width: 100vw;
+    height: 100px;
+    background-color: red;
+}
+
+#logo {
+
+    background-image: url("../assets/icons8-to-do-48.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+
+#title {
+    font-size: 3rem;
+}
