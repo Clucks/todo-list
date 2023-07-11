@@ -19,10 +19,13 @@ export const initialdom = () => {
     container
         .setAttributes({ id: "container" })
         .addChild(new Element('span')
-            .setTextContent("Projects"))
+            .setTextContent("Projects List:"))
+        .addChild(new Element('div')
+            .setAttributes({ id: "project-list" }))
         .addChild(new Element('button')
             .setTextContent("Add new project")
             .appendEventListener("click", function () {
+                const projectlist = document.querySelector("#project-list")
                 //ask for the name of the project
                 const name = prompt("What is the name of the new project?");
 
@@ -34,13 +37,13 @@ export const initialdom = () => {
                 const title = document.createElement('h1');
                 title.textContent = name;
 
-                const p = document.createElement('p')
-                p.textContent = "sefoig"
-                title.appendChild(p);
+                // const p = document.createElement('p')
+                // p.textContent = "sefoig"
                 realDom.appendChild(title);
-                content.appendChild(realDom)
+                // realDom.appendChild(p);
+
+                projectlist.appendChild(realDom)
             }))
-        .addChild(new Element('div'))
 
     //appends and builds all the doms
     const headerdom = header.buildElement();
