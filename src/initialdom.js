@@ -32,22 +32,20 @@ export const initialdom = () => {
                 const project = new Projects(name);
 
                 //uploads the project to the dom
-                const realDom = document.createElement('div');
-                const title = document.createElement('h1');
-                title.textContent = name;
+                const projectTab = new Element('div');
+                projectTab
+                    .addChild(new Element('h1')
+                        .setTextContent(name));
 
-                // const p = document.createElement('p')
-                // p.textContent = "sefoig"
-                realDom.appendChild(title);
-                // realDom.appendChild(p);
 
-                projectlist.appendChild(realDom)
+                const projectTabDom = projectTab.buildElement();
+                projectlist.appendChild(projectTabDom)
             }))
 
     const projectlist = new Element('div')
     projectlist
-        .addChild(new Element('div')
-            .setAttributes({ id: "project-list" }))
+        .setAttributes({ id: "project-list" })
+        
     //appends and builds all the doms
     const headerdom = header.buildElement();
     const containerdom = container.buildElement();
@@ -55,10 +53,4 @@ export const initialdom = () => {
     content.appendChild(headerdom);
     content.appendChild(containerdom)
     content.appendChild(projectlistdom)
-
-
-
-
-
-
 }
