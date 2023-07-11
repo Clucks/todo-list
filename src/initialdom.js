@@ -20,8 +20,7 @@ export const initialdom = () => {
         .setAttributes({ id: "container" })
         .addChild(new Element('span')
             .setTextContent("Projects List:"))
-        .addChild(new Element('div')
-            .setAttributes({ id: "project-list" }))
+
         .addChild(new Element('button')
             .setTextContent("Add new project")
             .appendEventListener("click", function () {
@@ -45,11 +44,17 @@ export const initialdom = () => {
                 projectlist.appendChild(realDom)
             }))
 
+    const projectlist = new Element('div')
+    projectlist
+        .addChild(new Element('div')
+            .setAttributes({ id: "project-list" }))
     //appends and builds all the doms
     const headerdom = header.buildElement();
     const containerdom = container.buildElement();
+    const projectlistdom = projectlist.buildElement();
     content.appendChild(headerdom);
     content.appendChild(containerdom)
+    content.appendChild(projectlistdom)
 
 
 
