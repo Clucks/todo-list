@@ -1,6 +1,6 @@
-class Projects {
+export class Projects {
   constructor(name) {
-    this.niame = name;
+    this.name = name;
     this.Todos = [];
   }
 
@@ -10,13 +10,7 @@ class Projects {
 
   //Should create a new todo in the project
   buildProject() {
-    //ask for the name of the project
-    const name = prompt("What is the name of the new project?");
-
-    //makes the project object
-    const project = new Projects(name);
-
-    //uploads the project to the dom
+    
   }
 
 
