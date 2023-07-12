@@ -3,15 +3,23 @@ import { Element, Projects } from "./classes";
 export const initialdom = () => {
     const content = document.querySelector('#content');
 
-    //creates the header for the inital dom
+    // creates the header for the initial DOM
     const header = new Element('div');
     header
         .setAttributes({ id: "header" })
         .addChild(new Element('span')
             .setAttributes({ id: "logo" }))
         .addChild(new Element('span')
-            .setTextContent('When2do')
-            .setAttributes({ id: "title" }))
+            .setAttributes({ id: "title" })
+            .addChild(new Element('span')
+                .setTextContent('When'))
+            .addChild(new Element('span')
+                .setTextContent('2')
+                .setAttributes({ style: "color: #42A4EB;" }))
+            .addChild(new Element('span')
+                .setTextContent('do')))
+
+
 
 
     //creates the projects tab to create a new list
@@ -35,7 +43,7 @@ export const initialdom = () => {
                 const projectTab = new Element('div');
                 projectTab
                     .addChild(new Element('h1')
-                        .setTextContent(name));
+                        .setTextContent(name))
 
 
                 const projectTabDom = projectTab.buildElement();
@@ -45,7 +53,7 @@ export const initialdom = () => {
     const projectlist = new Element('div')
     projectlist
         .setAttributes({ id: "project-list" })
-        
+
     //appends and builds all the doms
     const headerdom = header.buildElement();
     const containerdom = container.buildElement();

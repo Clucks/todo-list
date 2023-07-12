@@ -6,6 +6,7 @@ body {
     border: 0;
 
     font-family: 'Bebas Neue', sans-serif;
+    
 }
 
 #content{
@@ -14,17 +15,30 @@ body {
     "a a a a"
     "b c c c"
     "b c c c"
+    
+    "b c c c"
+    "b c c c"
+    "b c c c"
+    "b c c c"
+
+    "b c c c";
+    height:100vh;
+
 }
 
 #header {
     grid-area: a;
-    width: 100vw;
-    height: 100px;
-    background-color: red;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgb(73, 73, 73);
 
 }
 
 #logo {
+    height:50px;
+    width: 50px;
 
     background-image: url("../assets/icons8-to-do-48.png");
     background-repeat: no-repeat;
@@ -38,4 +52,9 @@ body {
 }
 #container{
     grid-area:b;
+    background-color:#42A4EB;
+}
+#project-list{
+    grid-area:c;
+    
 }
