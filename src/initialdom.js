@@ -23,12 +23,12 @@ export const initialdom = () => {
 
 
     //creates the projects tab to create a new list
-    const container = new Element('div');
-    container
+    const sidebar = new Element('div');
+    sidebar
         .setAttributes({ id: "container" })
         .addChild(new Element('span')
             .setTextContent("Projects List:"))
-
+            .setAttributes({id})
         .addChild(new Element('button')
             .setTextContent("Add new project")
             .appendEventListener("click", function () {
@@ -44,6 +44,12 @@ export const initialdom = () => {
                 projectTab
                     .addChild(new Element('h1')
                         .setTextContent(name))
+                    .addChild(new Element('button')
+                        .setTextContent("new todo")
+                        .appendEventListener('click',function(){
+                            console.log("hi");
+
+                        }))
 
 
                 const projectTabDom = projectTab.buildElement();
@@ -56,9 +62,9 @@ export const initialdom = () => {
 
     //appends and builds all the doms
     const headerdom = header.buildElement();
-    const containerdom = container.buildElement();
+    const sidebardom = sidebar.buildElement();
     const projectlistdom = projectlist.buildElement();
     content.appendChild(headerdom);
-    content.appendChild(containerdom)
+    content.appendChild(sidebardom)
     content.appendChild(projectlistdom)
 }

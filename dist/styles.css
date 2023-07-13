@@ -6,38 +6,38 @@ body {
     border: 0;
 
     font-family: 'Bebas Neue', sans-serif;
-    
+
 }
 
-#content{
-    display:grid;
-    grid-template-areas: 
-    "a a a a"
-    "b c c c"
-    "b c c c"
-    "b c c c"
-    "b c c c"
-    "b c c c"
-    "b c c c"
-    "b c c c";
+#content {
+    display: grid;
+    grid-template-areas:
+        "a a a a a a a a a"
+        "b c c c c c c c c"
+        "b c c c c c c c c"
+        "b c c c c c c c c"
+        "b c c c c c c c c"
+        "b c c c c c c c c"
+        "b c c c c c c c c";
+   
     height:100vh;
 
 }
 
 #header {
     grid-area: a;
-    min-height:100px;
-    padding:20px;
-    display:flex;
+    min-height: 100px;
+    padding: 20px;
+    display: flex;
     justify-content: center;
     align-items: center;
 
-    background-color: rgb(73, 73, 73);
+    background-color: #494949;
 
 }
 
 #logo {
-    height:60px;
+    height: 60px;
     width: 60px;
     margin: 15px;
 
@@ -49,13 +49,16 @@ body {
 
 
 #title {
+    color: #fff;
     font-size: 75px;
 }
-#container{
-    grid-area:b;
-    background-color:#42A4EB;
+
+#container {
+    grid-area: b;
+    background-color: #42A4EB;
 }
-#project-list{
-    grid-area:c;
-    
+
+#project-list {
+    grid-area: c;
+
 }
