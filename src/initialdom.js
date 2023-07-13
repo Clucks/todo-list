@@ -26,35 +26,44 @@ export const initialdom = () => {
     const sidebar = new Element('div');
     sidebar
         .setAttributes({ id: "container" })
-        .addChild(new Element('span')
-            .setTextContent("Projects List:"))
-            .setAttributes({id})
-        .addChild(new Element('button')
-            .setTextContent("Add new project")
-            .appendEventListener("click", function () {
-                const projectlist = document.querySelector("#project-list")
-                //ask for the name of the project
-                const name = prompt("What is the name of the new project?");
+        .addChild(new Element('div')
+            .setTextContent('Home')
+            .setAttributes({ class: "tab" }))
+        .addChild(new Element('div')
+            .setTextContent('Projects')
+            .setAttributes({ class: "tab" }))
+        .addChild(new Element('div')
+            .setTextContent('Settings')
+            .setAttributes({ class: "tab" }))
+    // .addChild(new Element('span')
+    //     .setTextContent("Projects List:"))
+    //     .setAttributes({id})
+    // .addChild(new Element('button')
+    //     .setTextContent("Add new project")
+    //     .appendEventListener("click", function () {
+    //         const projectlist = document.querySelector("#project-list")
+    //         //ask for the name of the project
+    //         const name = prompt("What is the name of the new project?");
 
-                //makes the project object
-                const project = new Projects(name);
+    //         //makes the project object
+    //         const project = new Projects(name);
 
-                //uploads the project to the dom
-                const projectTab = new Element('div');
-                projectTab
-                    .addChild(new Element('h1')
-                        .setTextContent(name))
-                    .addChild(new Element('button')
-                        .setTextContent("new todo")
-                        .appendEventListener('click',function(){
-                            console.log("hi");
+    //         //uploads the project to the dom
+    //         const projectTab = new Element('div');
+    //         projectTab
+    //             .addChild(new Element('h1')
+    //                 .setTextContent(name))
+    //             .addChild(new Element('button')
+    //                 .setTextContent("new todo")
+    //                 .appendEventListener('click',function(){
+    //                     console.log("hi");
 
-                        }))
+    //                 }))
 
 
-                const projectTabDom = projectTab.buildElement();
-                projectlist.appendChild(projectTabDom)
-            }))
+    //         const projectTabDom = projectTab.buildElement();
+    //         projectlist.appendChild(projectTabDom)
+    //     }))
 
     const projectlist = new Element('div')
     projectlist

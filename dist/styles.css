@@ -6,6 +6,7 @@ body {
     border: 0;
 
     font-family: 'Bebas Neue', sans-serif;
+    color: #efefef;;
 
 }
 
@@ -19,8 +20,8 @@ body {
         "b c c c c c c c c"
         "b c c c c c c c c"
         "b c c c c c c c c";
-   
-    height:100vh;
+
+    height: 100vh;
 
 }
 
@@ -28,6 +29,7 @@ body {
     grid-area: a;
     min-height: 100px;
     padding: 20px;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -54,11 +56,43 @@ body {
 }
 
 #container {
+    display:flex;
+    flex-direction: column;
     grid-area: b;
     background-color: #42A4EB;
 }
 
+.tab {
+    
+    font-size: 1.5rem;
+    color: #ffffff;
+    position: relative;
+    margin: 20px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.tab::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 90%;
+    height: 2px;
+    background-color: rgb(255, 255, 255);
+    opacity: 0.2;
+    /* Initial opacity */
+    transition: opacity 0.3s ease;
+    /* Transition effect for opacity */
+}
+
+.tab:hover::after {
+    opacity: 0.5;
+    /* Opacity on hover */
+}
+
 #project-list {
     grid-area: c;
+    background-color: #efefef;
 
 }
