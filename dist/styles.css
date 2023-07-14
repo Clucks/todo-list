@@ -6,7 +6,8 @@ body {
     border: 0;
 
     font-family: 'Bebas Neue', sans-serif;
-    color: #efefef;;
+    color: #efefef;
+    ;
 
 }
 
@@ -56,14 +57,14 @@ body {
 }
 
 #container {
-    display:flex;
+    display: flex;
     flex-direction: column;
     grid-area: b;
     background-color: #42A4EB;
 }
 
 .tab {
-    
+
     font-size: 1.5rem;
     color: #ffffff;
     position: relative;
@@ -91,8 +92,21 @@ body {
     /* Opacity on hover */
 }
 
+#add-project {
+    background-image: url("../assets/icons8-to-do-48.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
 #project-list {
     grid-area: c;
     background-color: #efefef;
+
+}
+
+#projects {
+    margin: 5px 0px;
+    padding-left: 25px;
 
 }
