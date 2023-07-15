@@ -1,6 +1,7 @@
 export class Projects {
-  constructor(name) {
+  constructor(name, desc) {
     this.name = name;
+    this.desc = desc;
     this.Todos = [];
   }
 
@@ -10,7 +11,7 @@ export class Projects {
 
   //Should create a new todo in the project
   buildProject() {
-    
+
   }
 
 

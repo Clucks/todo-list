@@ -84,7 +84,7 @@ export const initialdom = () => {
             .setTextContent("Create")
             .setAttributes({ type: "sumbit", value: "sumbit" })
             .appendEventListener("click", function () {
-                document.querySelector(".projectform").classList.toggle("hidden")
+                document.querySelector(".projectform").toggleAttribute("hidden")
             }))
 
     const projectlist = new Element('div')
