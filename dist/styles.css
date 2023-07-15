@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
+
 body {
     margin: 0;
     padding: 0;
@@ -109,4 +110,53 @@ body {
     margin: 5px 0px;
     padding-left: 25px;
 
+}
+.projectform[hidden] {
+  display: none !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.projectform {
+    background-color: rgb(28, 90, 182, 1);
+    padding: 5vh;
+    border-radius: 5px;
+    position: absolute;
+    left: 40vw;
+    top: 30vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.projectform *{
+    padding:0px 0px;
+
+}
+
+.projectform div {
+    font-size: 2rem;
+    color: rgb(239, 239, 239, 1)
+}
+
+.projectinput {
+    width: 300px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.projectform button {
+    padding: 10px 20px;
+    background-color: #42A4EB;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.projectform button:hover {
+    opacity: 0.8;
 }

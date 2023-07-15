@@ -54,8 +54,9 @@ export class Element {
 
     // Add attributes to element
     for (const attribute in this.attributes) {
-      if (this.attributes[attribute] === true ||
-        this.attributes[attribute] === false) {
+      if (attribute === "hidden" && this.attributes[attribute] === true) {
+        realDom.setAttribute("hidden", "");
+      } else if (this.attributes[attribute] === true || this.attributes[attribute] === false) {
         realDom.toggleAttribute(attribute, this.attributes[attribute]);
       } else {
         realDom.setAttribute(attribute, this.attributes[attribute]);
