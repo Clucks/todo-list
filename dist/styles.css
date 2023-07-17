@@ -111,10 +111,11 @@ body {
     padding-left: 25px;
 
 }
+
 .projectform[hidden] {
-  display: none !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+    display: none !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .projectform {
@@ -130,8 +131,8 @@ body {
     justify-content: space-around;
 }
 
-.projectform *{
-    padding:0px 0px;
+.projectform * {
+    padding: 0px 0px;
 
 }
 
@@ -159,4 +160,8 @@ body {
 
 .projectform button:hover {
     opacity: 0.8;
+}
+
+.projectinput.error {
+    border: 1px solid red;
 }

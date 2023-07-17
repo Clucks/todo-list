@@ -1,4 +1,6 @@
 import { Element, Projects } from "./classes";
+import { createNewProject } from "./submitButton/createNewProject";
+import { sumbitVerify } from "./submitButton/submitVerify";
 //Loads the inital dom of the todo list
 export const initialdom = () => {
     const content = document.querySelector('#content');
@@ -39,52 +41,33 @@ export const initialdom = () => {
         .addChild(new Element('div')
             .setTextContent('Settings')
             .setAttributes({ class: "tab" }))
-    // .addChild(new Element('span')
-    //     .setTextContent("Projects List:"))
-    //     .setAttributes({id})
-    // .addChild(new Element('button')
-    //     .setTextContent("Add new project")
-    //     .appendEventListener("click", function () {
-    //         const projectlist = document.querySelector("#project-list")
-    //         //ask for the name of the project
-    //         const name = prompt("What is the name of the new project?");
-
-    //         //makes the project object
-    //         const project = new Projects(name);
-
-    //         //uploads the project to the dom
-    //         const projectTab = new Element('div');
-    //         projectTab
-    //             .addChild(new Element('h1')
-    //                 .setTextContent(name))
-    //             .addChild(new Element('button')
-    //                 .setTextContent("new todo")
-    //                 .appendEventListener('click',function(){
-    //                     console.log("hi");
-
-    //                 }))
-
-
-    //         const projectTabDom = projectTab.buildElement();
-    //         projectlist.appendChild(projectTabDom)
-    //     }))
 
     const prompt = new Element('div')
     prompt
-        .setAttributes({ class: "projectform", hidden: true})
+        .setAttributes({ class: "projectform", hidden: true })
         .addChild(new Element('div')
             .setTextContent("Project Name"))
         .addChild(new Element('input')
-            .setAttributes({ class: "projectinput" }))
+            .setAttributes({
+                required: true,
+                class: "projectinput",
+                placeholder: "Enter project title"
+            }))
         .addChild(new Element('div')
             .setTextContent("Project Description"))
         .addChild(new Element('input')
-            .setAttributes({ class: "projectinput" }))
+            .setAttributes({ 
+                required: true, 
+                class: "projectinput",
+                placeholder: "Enter project desc"
+            }))
         .addChild(new Element('button')
             .setTextContent("Create")
             .setAttributes({ type: "sumbit", value: "sumbit" })
-            .appendEventListener("click", function () {
-                document.querySelector(".projectform").toggleAttribute("hidden")
+            .appendEventListener("click", function (event) {
+                if (sumbitVerify(event)) {
+                    createNewProject(title, desc);
+                }
             }))
 
     const projectlist = new Element('div')
