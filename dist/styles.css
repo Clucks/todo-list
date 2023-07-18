@@ -186,8 +186,10 @@ body {
     color: rgb(0, 0, 0);
     display: flex;
     justify-content: space-between;
-    
-    border-bottom: 1px solid blue;
+}
+
+#border {
+    border-bottom: 1px solid #42A4EB;
 }
 
 #list1 div div :last-child {

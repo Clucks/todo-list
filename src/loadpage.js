@@ -1,5 +1,8 @@
-import { initialdom } from "./initialdom"
+import { displayList, loadHeader, loadProjectForm, loadSidebar } from "./initialdom"
 
 export const loadpage = () => {
-    initialdom();
+    loadHeader();
+    loadSidebar();
+    displayList();
+    loadProjectForm();
 }
