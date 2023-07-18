@@ -210,3 +210,57 @@ body {
     justify-self: center;
     font-size: 2rem;
 }
+
+.todoform[hidden] {
+    display: none !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.todoform {
+    background-color: rgb(28, 90, 182, 1);
+    padding: 5vh;
+    border-radius: 5px;
+    position: absolute;
+    left: 40vw;
+    top: 30vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.todoform * {
+    padding: 0px 0px;
+
+}
+
+.todoform div {
+    font-size: 2rem;
+    color: rgb(239, 239, 239, 1)
+}
+
+.todoinput {
+    width: 300px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.todoform button {
+    padding: 10px 20px;
+    background-color: #42A4EB;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.todoform button:hover {
+    opacity: 0.8;
+}
+
+.todoinput.error {
+    border: 1px solid red;
+}

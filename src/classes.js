@@ -1,14 +1,31 @@
 export class Projects {
   constructor(name, desc) {
-    this.name = name;
-    this.desc = desc;
-    this.Todos = [];
+    this._name = name;
+    this._desc = desc;
+    this._todos = [];
+  }
+
+  get name() {
+    return this._name;
+  }
+
+  set name(value) {
+    this._name = value;
+  }
+
+  get desc() {
+    return this._desc;
+  }
+
+  set desc(value) {
+    this._desc = value;
   }
 
   appendToDo(todo) {
-    this.Todos.push(todo);
+    this._todos.push(todo);
   }
 }
+
 class Todo {
   constructor(priority, title, description, date) {
     this.priority = priority;
