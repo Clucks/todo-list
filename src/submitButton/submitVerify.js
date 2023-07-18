@@ -13,6 +13,6 @@ export const sumbitVerify = (event) => {
         }
     });
 
-    document.querySelector(".projectform").toggleAttribute("hidden");
+    
     return isFormValid;
 }

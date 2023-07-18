@@ -8,13 +8,6 @@ export class Projects {
   appendToDo(todo) {
     this.Todos.push(todo);
   }
-
-  //Should create a new todo in the project
-  buildProject() {
-
-  }
-
-
 }
 class Todo {
   constructor(priority, title, description, date) {
