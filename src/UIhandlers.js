@@ -1,10 +1,9 @@
+import { format } from "date-fns";
 import { Element, Projects } from "./classes";
 import { sumbitVerify } from "./submitButton/submitVerify";
-import { formatDistance } from "date-fns";
 
-//Loads the inital dom of the todo list
+//Loads the initial DOM of the todo list
 const content = document.querySelector('#content');
-
 
 //Loads the header content
 export const loadHeader = () => {
@@ -26,7 +25,7 @@ export const loadHeader = () => {
                 .setTextContent("Hello, example12345@gmail.com"))
             .addChild(new Element("button")))
     const headerdom = header.buildElement();
-    content.appendChild(headerdom)
+    content.appendChild(headerdom);
 }
 
 //Loads the sidebar content
@@ -41,7 +40,7 @@ export const loadSidebar = () => {
         .addChild(new Element('div').setAttributes({ id: "projects" })
             .addChild(new Element('div')
                 .setTextContent('Add New Project +').appendEventListener("click", function (event) {
-                    event.preventDefault
+                    event.preventDefault();
                     document.querySelector(".projectform").toggleAttribute('hidden');
                 })))
         .addChild(new Element('div')
@@ -53,7 +52,7 @@ export const loadSidebar = () => {
 
 //Creates the form to create a new project
 export const loadProjectForm = () => {
-    const prompt = new Element('div')
+    const prompt = new Element('div');
     prompt
         .setAttributes({ class: "projectform", hidden: true })
         .addChild(new Element('div')
@@ -74,26 +73,25 @@ export const loadProjectForm = () => {
             }))
         .addChild(new Element('button')
             .setTextContent("Create")
-            .setAttributes({ type: "sumbit", value: "sumbit" })
+            .setAttributes({ type: "submit", value: "submit" })
             .appendEventListener("click", function (event) {
                 if (sumbitVerify(event)) {
                     document.querySelector(".projectform").toggleAttribute("hidden");
-                    const inputs = document.querySelectorAll(".projectinput")
+                    const inputs = document.querySelectorAll(".projectinput");
                     const title = inputs[0].value.trim();
                     const desc = inputs[1].value.trim();
-                    const project = new Projects(title, desc)
+                    const project = new Projects(title, desc);
                     appendProjectToList(title, desc);
-
                 }
-            }))
+            }));
     const promptdom = prompt.buildElement();
     content.appendChild(promptdom);
 }
 
 //Function to append project to displayList
 function appendProjectToList(title, desc) {
-    const parent = document.querySelector("#project-list")
-    const container = new Element('div')
+    const parent = document.querySelector("#project-list");
+    const container = new Element('div');
     container
         .setAttributes({ id: "list1" })
         .addChild(new Element('div')
@@ -107,75 +105,86 @@ function appendProjectToList(title, desc) {
         .addChild(new Element('div').setAttributes({ id: "border" }))
         .addChild(new Element('div').setTextContent('Add new Todo +')
             .appendEventListener('click', function () {
-                console.log("Inside of new Todo event listener");
+                console.log("Inside the new Todo event listener");
             }))
-        .addChild(new Element('div').setAttributes({ id: "border" }))
+        .addChild(new Element('div').setAttributes({ id: "border" }));
     const containerdom = container.buildElement();
-    parent.appendChild(containerdom)
+    parent.appendChild(containerdom);
 }
-//Loads the dom to display projects and todo
+
+//Loads the dom to display projects and todos
 export const displayList = () => {
-    const projectlist = new Element('div')
+    const projectlist = new Element('div');
     projectlist
-        .setAttributes({ id: "project-list" })
+        .setAttributes({ id: "project-list" });
 
     const projectlistdom = projectlist.buildElement();
-    content.appendChild(projectlistdom)
+    content.appendChild(projectlistdom);
 }
 
 //Loads the dom to display the form to create new Todos 
 export const loadTodoForm = () => {
-    const prompt = new Element('div')
+    const today = new Date();
+    const formatDate = format(today, "yyyy-MM-dd");
+
+    const prompt = new Element('div');
     prompt
-        .setAttributes({ class: "todoform", hidden: false})
+        .setAttributes({ class: "todoform", hidden: false })
         .addChild(new Element('div')
-            .setTextContent("Todo Name"))
+            .setTextContent("Name"))
         .addChild(new Element('input')
             .setAttributes({
-                type:"text",
+                type: "text",
                 required: true,
                 class: "todoinput",
-                placeholder: "Enter Todo title"
+                placeholder: "Enter todo name"
             }))
         .addChild(new Element('div')
-            .setTextContent("Todo Date"))
+            .setTextContent("Date"))
         .addChild(new Element('input')
             .setAttributes({
-                type:"date",
+                type: "date",
                 required: true,
                 class: "todoinput",
+                value: formatDate
             }))
         .addChild(new Element('div')
-            .setTextContent("Todo Priority"))
+            .setTextContent("High Priority")
+            .setAttributes({
+                style: "font-size:1.5rem"
+            }))
         .addChild(new Element('input')
             .setAttributes({
+                type: "checkbox",
                 required: true,
                 class: "todoinput",
-                placeholder: "Enter Todo title"
+                style: "scale(2)"
             }))
         .addChild(new Element('div')
-            .setTextContent("todo Completion"))
-            w 
+            .setTextContent("Completion")
+            .setAttributes({
+                style: "font-size:1.5rem"
+            }))
         .addChild(new Element('input')
             .setAttributes({
+                type: "checkbox",
                 required: true,
                 class: "todoinput",
-                placeholder: "Enter todo desc"
+                style: "scale(2)"
             }))
         .addChild(new Element('button')
             .setTextContent("Create")
-            .setAttributes({ type: "sumbit", value: "sumbit" })
+            .setAttributes({ type: "submit", value: "submit" })
             .appendEventListener("click", function (event) {
                 if (sumbitVerify(event)) {
                     document.querySelector(".todoform").toggleAttribute("hidden");
-                    const inputs = document.querySelectorAll(".todoinput")
+                    const inputs = document.querySelectorAll(".todoinput");
                     const title = inputs[0].value.trim();
                     const desc = inputs[1].value.trim();
-                    const todo = new todos(title, desc)
+                    const todo = new todos(title, desc);
                     appendtodoToList(title, desc);
-
                 }
-            }))
+            }));
     const promptdom = prompt.buildElement();
     content.appendChild(promptdom);
 }
