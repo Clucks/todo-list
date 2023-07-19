@@ -1,6 +1,8 @@
-export const sumbitVerify = (event) => {
+export const submitVerify = (event, inputSelector) => {
+    console.log("Sumbit verify is currently running");
     event.preventDefault();
-    var inputs = document.querySelectorAll(".projectinput");
+
+    var inputs = document.querySelectorAll(inputSelector);
     var isFormValid = true;
 
     // Check if any input is empty
@@ -10,9 +12,9 @@ export const sumbitVerify = (event) => {
             input.classList.add("error");
         } else {
             input.classList.remove("error");
+            
         }
     });
 
-    
     return isFormValid;
 }

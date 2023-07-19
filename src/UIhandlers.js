@@ -1,6 +1,6 @@
 import { format } from "date-fns";
-import { Element, Projects } from "./classes";
-import { sumbitVerify } from "./submitButton/submitVerify";
+import { Element, Projects, Todo } from "./classes";
+import { submitVerify } from "./submitButton/submitVerify";
 
 //Loads the initial DOM of the todo list
 const content = document.querySelector('#content');
@@ -75,7 +75,7 @@ export const loadProjectForm = () => {
             .setTextContent("Create")
             .setAttributes({ type: "submit", value: "submit" })
             .appendEventListener("click", function (event) {
-                if (sumbitVerify(event)) {
+                if (submitVerify(event, ".projectinput")) {
                     document.querySelector(".projectform").toggleAttribute("hidden");
                     const inputs = document.querySelectorAll(".projectinput");
                     const title = inputs[0].value.trim();
@@ -106,6 +106,8 @@ function appendProjectToList(title, desc) {
         .addChild(new Element('div').setTextContent('Add new Todo +')
             .appendEventListener('click', function () {
                 console.log("Inside the new Todo event listener");
+                document.querySelector(".todoform").toggleAttribute("hidden")
+
             }))
         .addChild(new Element('div').setAttributes({ id: "border" }));
     const containerdom = container.buildElement();
@@ -129,7 +131,7 @@ export const loadTodoForm = () => {
 
     const prompt = new Element('div');
     prompt
-        .setAttributes({ class: "todoform", hidden: false })
+        .setAttributes({ class: "todoform", hidden: true })
         .addChild(new Element('div')
             .setTextContent("Name"))
         .addChild(new Element('input')
@@ -149,40 +151,42 @@ export const loadTodoForm = () => {
                 value: formatDate
             }))
         .addChild(new Element('div')
-            .setTextContent("High Priority")
-            .setAttributes({
-                style: "font-size:1.5rem"
-            }))
-        .addChild(new Element('input')
-            .setAttributes({
-                type: "checkbox",
-                required: true,
-                class: "todoinput",
-                style: "scale(2)"
-            }))
-        .addChild(new Element('div')
-            .setTextContent("Completion")
-            .setAttributes({
-                style: "font-size:1.5rem"
-            }))
-        .addChild(new Element('input')
-            .setAttributes({
-                type: "checkbox",
-                required: true,
-                class: "todoinput",
-                style: "scale(2)"
-            }))
+            .addChild(new Element('div')
+                .addChild(new Element('div')
+                    .setTextContent("High Priority")
+                    .setAttributes({
+                        style: "font-size:1.5rem"
+                    }))
+                .addChild(new Element('input')
+                    .setAttributes({
+                        type: "checkbox",
+                        required: true,
+                        class: "todoinput",
+                    })))
+            .addChild(new Element('div')
+                .addChild(new Element('div')
+                    .setTextContent("Completion")
+                    .setAttributes({
+                        style: "font-size:1.5rem"
+                    }))
+                .addChild(new Element('input')
+                    .setAttributes({
+                        type: "checkbox",
+                        required: true,
+                        class: "todoinput",
+                    }))))
         .addChild(new Element('button')
             .setTextContent("Create")
             .setAttributes({ type: "submit", value: "submit" })
             .appendEventListener("click", function (event) {
-                if (sumbitVerify(event)) {
+                console.log("Processing new todo for the project");
+                if (submitVerify(event, ".todoinput")) {
                     document.querySelector(".todoform").toggleAttribute("hidden");
                     const inputs = document.querySelectorAll(".todoinput");
                     const title = inputs[0].value.trim();
                     const desc = inputs[1].value.trim();
-                    const todo = new todos(title, desc);
-                    appendtodoToList(title, desc);
+                    const todo = new Todo(title, desc);
+                    Projects.appendToDo(todo);
                 }
             }));
     const promptdom = prompt.buildElement();

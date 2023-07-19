@@ -230,14 +230,19 @@ body {
     justify-content: space-around;
 }
 
-.todoform * {
-    padding: 0px 0px;
-
-}
-
 .todoform div {
     font-size: 2rem;
     color: rgb(239, 239, 239, 1)
+}
+
+.todoform div div{
+    padding: 5px 0;
+    justify-content: space-between;
+    display: flex;
+}
+.todoform div div input{
+    width:fit-content;
+    transform: scale(1.2);
 }
 
 .todoinput {

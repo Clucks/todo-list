@@ -5,50 +5,19 @@ export class Projects {
     this._todos = [];
   }
 
-  get name() {
-    return this._name;
-  }
-
-  set name(value) {
-    this._name = value;
-  }
-
-  get desc() {
-    return this._desc;
-  }
-
-  set desc(value) {
-    this._desc = value;
-  }
-
-  appendToDo(todo) {
+  function appendToDo(todo) {
     this._todos.push(todo);
   }
 }
 
-class Todo {
-  constructor(priority, title, description, date) {
-    this.priority = priority;
+export class Todo {
+  constructor(title, description, date, priority) {
     this.title = title;
     this.description = description;
     this.date = date;
+    this.priority = priority;
   }
 
-  get priority() {
-    return this.priority;
-  }
-
-  get title() {
-    return this.title;
-  }
-
-  get description() {
-    return this.description;
-  }
-
-  get date() {
-    return this.date;
-  }
 }
 
 export class Element {
