@@ -1,11 +1,34 @@
-export class Projects {
+export class ProjectList {
+  static projectsArray = [];
+
+  static getAllProjects() {
+    return ProjectList.projectsArray;
+  }
+
+  static addProject(project) {
+    ProjectList.projectsArray.push(project);
+  }
+
+  static deleteProject(project) {
+    ProjectList.projectsArray.splice(Librarian.projectsArray.indexOf(project), 1);
+  }
+  static getProjectById(id) {
+    return ProjectList.projectsArray.find(project => project._id === id);
+  }
+
+}
+
+export class Project {
+  static counter = 0;
   constructor(name, desc) {
     this._name = name;
     this._desc = desc;
     this._todos = [];
+    this._id = Project.counter;
+    Project.counter++;
   }
 
-  function appendToDo(todo) {
+  appendToDo(todo) {
     this._todos.push(todo);
   }
 }

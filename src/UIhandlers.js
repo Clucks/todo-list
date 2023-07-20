@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { Element, Projects, Todo } from "./classes";
+import { Element, Project, ProjectList, Todo } from "./classes";
 import { submitVerify } from "./submitButton/submitVerify";
 
 //Loads the initial DOM of the todo list
@@ -80,8 +80,9 @@ export const loadProjectForm = () => {
                     const inputs = document.querySelectorAll(".projectinput");
                     const title = inputs[0].value.trim();
                     const desc = inputs[1].value.trim();
-                    const project = new Projects(title, desc);
+                    const project = new Project(title, desc);
                     appendProjectToList(title, desc);
+                    ProjectList.addProject(project)
                 }
             }));
     const promptdom = prompt.buildElement();
@@ -184,11 +185,31 @@ export const loadTodoForm = () => {
                     document.querySelector(".todoform").toggleAttribute("hidden");
                     const inputs = document.querySelectorAll(".todoinput");
                     const title = inputs[0].value.trim();
-                    const desc = inputs[1].value.trim();
-                    const todo = new Todo(title, desc);
-                    Projects.appendToDo(todo);
+                    const date = inputs[1].value.trim();
+                    const todo = new Todo(title, date);
+                    ProjectList.getProjectById(0).appendToDo(todo)
+                    //Creates a new dom element that holds the todo into the project 
+                    handleNewTodoIntoProject(title, date);
+
                 }
             }));
     const promptdom = prompt.buildElement();
     content.appendChild(promptdom);
+}
+
+//Creates a new dom element that holds the todo into the project 
+export const handleNewTodoIntoProject = (title, date) => {
+    const parent = document.querySelector("#list1");
+    const border = new Element('div')
+    border
+        .setAttributes({ id: "border" });
+    const container = new Element('div');
+    container
+        .addChild(new Element('div').setTextContent(title))
+        .addChild(new Element('span').setTextContent(date))
+
+    const containerdom = container.buildElement();
+    const borderdom = border.buildElement();
+    parent.appendChild(containerdom);
+    parent.appendChild(borderdom)
 }
