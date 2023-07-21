@@ -1,6 +1,8 @@
 import { format } from "date-fns";
 import { Element, Project, ProjectList, Todo } from "./classes";
 import { submitVerify } from "./submitButton/submitVerify";
+import { deleteForm } from "./utilities";
+import { handleAppendingProjectForm } from "./loadpage";
 
 //Loads the initial DOM of the todo list
 const content = document.querySelector('#content');
@@ -30,6 +32,7 @@ export const loadHeader = () => {
 
 //Loads the sidebar content
 export const loadSidebar = () => {
+    console.log("Loading the side bar");
     const sidebar = new Element('div');
     sidebar
         .setAttributes({ id: "container" })
@@ -43,10 +46,14 @@ export const loadSidebar = () => {
                     src: "../assets/icons8-plus.svg",
                     style: "height:60%;"
                 })
-                .appendEventListener("click", function (event) {
-                    event.preventDefault();
-                    document.querySelector(".projectform").toggleAttribute('hidden');
-                })
+                //Creates a new form when you click on the plus
+                .appendEventListener("click", handleAppendingProjectForm)
+                //
+                //}
+                // .appendEventListener("click", function (event) {
+                //     event.preventDefault();
+                //     document.querySelector(".projectform").toggleAttribute('hidden');
+                // })
             )
         )
         .addChild(new Element('div')
@@ -66,56 +73,60 @@ export const loadSidebar = () => {
 
 //Creates the form to create a new project
 export const loadProjectForm = () => {
-    const prompt = new Element('div');
-    prompt
-        .setAttributes({ class: "projectform",id: "form", hidden: true })
-        .addChild(new Element('div')
-            .addChild(new Element('img')
-                .setAttributes({
-                    src: "../assets/icons8-close.svg"
-                })
-                //Should delete the form div.... need to create a function that will delete form divs
-                .appendEventListener("click", (e) => prompt.toggleAttribute("hidden"))
+    if (!document.querySelector("#form")) {
+        return new Element('div')
+            .setAttributes({ class: "projectform", id: "form" })
+            .addChild(new Element('div')
+                .addChild(new Element('img')
+                    .setAttributes({
+                        src: "../assets/icons8-close.svg"
+                    })
+                    //Should delete the form div.... need to create a function that will delete form divs
+                    .appendEventListener("click", (e) => deleteForm())
+                )
             )
-        )
+            .addChild(new Element('div')
+                .setTextContent("Project Name")
+            )
+            .addChild(new Element('input')
+                .setAttributes({
+                    required: true,
+                    class: "projectinput",
+                    placeholder: "Enter project title"
+                })
+            )
+            .addChild(new Element('div')
+                .setTextContent("Project Description")
+            )
+            .addChild(new Element('input')
+                .setAttributes({
+                    required: true,
+                    class: "projectinput",
+                    placeholder: "Enter project desc"
+                })
+            )
+            .addChild(new Element('button')
+                .setTextContent("Create")
+                .setAttributes({ type: "submit", value: "submit" })
+                .appendEventListener("click", function (event) {
+                    if (submitVerify(event, ".projectinput")) {
+                        document.querySelector(".projectform").toggleAttribute("hidden");
+                        const inputs = document.querySelectorAll(".projectinput");
+                        const title = inputs[0].value.trim();
+                        const desc = inputs[1].value.trim();
+                        const project = new Project(title, desc);
+                        appendProjectToList(title, desc);
+                        ProjectList.addProject(project)
+                    }
+                })
+            )
+            .buildElement();
 
-        .addChild(new Element('div')
-            .setTextContent("Project Name")
-        )
-        .addChild(new Element('input')
-            .setAttributes({
-                required: true,
-                class: "projectinput",
-                placeholder: "Enter project title"
-            })
-        )
-        .addChild(new Element('div')
-            .setTextContent("Project Description")
-        )
-        .addChild(new Element('input')
-            .setAttributes({
-                required: true,
-                class: "projectinput",
-                placeholder: "Enter project desc"
-            })
-        )
-        .addChild(new Element('button')
-            .setTextContent("Create")
-            .setAttributes({ type: "submit", value: "submit" })
-            .appendEventListener("click", function (event) {
-                if (submitVerify(event, ".projectinput")) {
-                    document.querySelector(".projectform").toggleAttribute("hidden");
-                    const inputs = document.querySelectorAll(".projectinput");
-                    const title = inputs[0].value.trim();
-                    const desc = inputs[1].value.trim();
-                    const project = new Project(title, desc);
-                    appendProjectToList(title, desc);
-                    ProjectList.addProject(project)
-                }
-            })
-        );
-    const promptdom = prompt.buildElement();
-    content.appendChild(promptdom);
+    } else {
+        return;
+    }
+    const prompt = new Element('div');
+
 }
 
 //Function to append project to displayList
