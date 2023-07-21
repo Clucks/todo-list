@@ -21,6 +21,18 @@ body {
         "b c c c c c c c c"
         "b c c c c c c c c"
         "b c c c c c c c c"
+        "b c c c c c c c c"
+        "b c c c c c c c c"
+        "b c c c c c c c c"
+        "b c c c c c c c c"
+        "b c c c c c c c c"
+        "b c c c c c c c c"
+        "b c c c c c c c c"
+        "b c c c c c c c c"
+        "b c c c c c c c c"
+        "b c c c c c c c c"
+        "b c c c c c c c c"
+        "b c c c c c c c c"
         "b c c c c c c c c";
 
     height: 100vh;
@@ -47,7 +59,7 @@ body {
 }
 
 #header :first-child span {
-    font-size: 7rem;
+    font-size: 5rem;
 }
 
 #logo {
@@ -73,34 +85,22 @@ body {
     background-color: rgba(66, 165, 235, 0.783);
 }
 
+#container div {
+    display: flex;
+    justify-content: space-around;
+    margin: 0vh 1vh;
+    margin-top: 1vh;
+    align-items: center
+}
+
+
 .tab {
 
-    font-size: 1.5rem;
+    font-size: 2.52rem;
     color: #ffffff;
-    position: relative;
-    margin: 20px;
-    padding: 5px;
-    cursor: pointer;
+
 }
 
-.tab::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 90%;
-    height: 2px;
-    background-color: rgb(255, 255, 255);
-    opacity: 0.2;
-    /* Initial opacity */
-    transition: opacity 0.3s ease;
-    /* Transition effect for opacity */
-}
-
-.tab:hover::after {
-    opacity: 0.5;
-    /* Opacity on hover */
-}
 
 #add-project {
     background-image: url("../assets/icons8-to-do-48.png");
@@ -235,13 +235,14 @@ body {
     color: rgb(239, 239, 239, 1)
 }
 
-.todoform div div{
+.todoform div div {
     padding: 5px 0;
     justify-content: space-between;
     display: flex;
 }
-.todoform div div input{
-    width:fit-content;
+
+.todoform div div input {
+    width: fit-content;
     transform: scale(1.2);
 }
 

@@ -1,5 +1,4 @@
 import { displayList, loadHeader, loadProjectForm, loadSidebar, loadTodoForm } from "./UIhandlers"
-import { Projects, ProjectsList } from "./classes";
 
 
 

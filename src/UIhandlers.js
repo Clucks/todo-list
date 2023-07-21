@@ -34,18 +34,32 @@ export const loadSidebar = () => {
     sidebar
         .setAttributes({ id: "container" })
         .addChild(new Element('div')
-            .setTextContent('Home')
-            .setAttributes({ class: "tab" }))
-        .addChild(new Element('div').setTextContent('Projects').setAttributes({ class: "tab" }))
-        .addChild(new Element('div').setAttributes({ id: "projects" })
             .addChild(new Element('div')
-                .setTextContent('Add New Project +').appendEventListener("click", function (event) {
+                .setTextContent('Projects')
+                .setAttributes({ class: "tab" })
+            )
+            .addChild(new Element('img')
+                .setAttributes({
+                    src: "../assets/icons8-plus.svg",
+                    style: "height:60%;"
+                })
+                .appendEventListener("click", function (event) {
                     event.preventDefault();
                     document.querySelector(".projectform").toggleAttribute('hidden');
-                })))
+                })
+            )
+        )
         .addChild(new Element('div')
-            .setTextContent('Settings')
-            .setAttributes({ class: "tab" }))
+            .setAttributes({
+                style: "border-top:2px solid white"
+            })
+        )
+        .addChild(new Element('div')
+            .setAttributes({
+
+            })
+        )
+
     const sidebardom = sidebar.buildElement();
     content.appendChild(sidebardom);
 }
@@ -54,23 +68,37 @@ export const loadSidebar = () => {
 export const loadProjectForm = () => {
     const prompt = new Element('div');
     prompt
-        .setAttributes({ class: "projectform", hidden: true })
+        .setAttributes({ class: "projectform",id: "form", hidden: true })
         .addChild(new Element('div')
-            .setTextContent("Project Name"))
+            .addChild(new Element('img')
+                .setAttributes({
+                    src: "../assets/icons8-close.svg"
+                })
+                //Should delete the form div.... need to create a function that will delete form divs
+                .appendEventListener("click", (e) => prompt.toggleAttribute("hidden"))
+            )
+        )
+
+        .addChild(new Element('div')
+            .setTextContent("Project Name")
+        )
         .addChild(new Element('input')
             .setAttributes({
                 required: true,
                 class: "projectinput",
                 placeholder: "Enter project title"
-            }))
+            })
+        )
         .addChild(new Element('div')
-            .setTextContent("Project Description"))
+            .setTextContent("Project Description")
+        )
         .addChild(new Element('input')
             .setAttributes({
                 required: true,
                 class: "projectinput",
                 placeholder: "Enter project desc"
-            }))
+            })
+        )
         .addChild(new Element('button')
             .setTextContent("Create")
             .setAttributes({ type: "submit", value: "submit" })
@@ -84,7 +112,8 @@ export const loadProjectForm = () => {
                     appendProjectToList(title, desc);
                     ProjectList.addProject(project)
                 }
-            }));
+            })
+        );
     const promptdom = prompt.buildElement();
     content.appendChild(promptdom);
 }

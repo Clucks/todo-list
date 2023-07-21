@@ -34,9 +34,8 @@ export class Project {
 }
 
 export class Todo {
-  constructor(title, description, date, priority) {
+  constructor(title, date, priority) {
     this.title = title;
-    this.description = description;
     this.date = date;
     this.priority = priority;
   }
