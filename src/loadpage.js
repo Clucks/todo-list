@@ -11,6 +11,7 @@ export const loadpage = () => {
     displayList();
 }
 
+//Handles loading the project form
 export const handleAppendingProjectForm = () => {
     if (loadProjectForm() !== undefined) {
         console.log("Handle appending project form");
@@ -19,6 +20,7 @@ export const handleAppendingProjectForm = () => {
     }
 }
 
+//Handles appending the project form
 export const handleAppendingProject = (title, desc) => {
     if (appendProjectToList(title, desc) !== undefined) {
 
@@ -29,22 +31,13 @@ export const handleAppendingProject = (title, desc) => {
 
 }
 
+//Handles appending the todo form
 export const handleAppendingTodoForm = (event) => {
-    if(loadTodoForm() !== undefined){
+    if (loadTodoForm() !== undefined) {
         console.log("Handle appending todo form for a project");
         const form = loadTodoForm();
         content.appendChild(form);
     }
-    console.log("Processing new todo for the project");
-    if (submitVerify(event, ".todoinput")) {
-        const inputs = document.querySelectorAll(".todoinput");
-        const title = inputs[0].value.trim();
-        const date = inputs[1].value.trim();
-        const todo = new Todo(title, date);
-        ProjectList.getProjectById(0).appendToDo(todo)
-        //Creates a new dom element that holds the todo into the project 
-        handleNewTodoIntoProject(title, date);
-
-    }
-
 }
+
+//Handles appending the todo to the project

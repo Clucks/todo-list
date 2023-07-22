@@ -1,6 +1,5 @@
 import { submitVerify } from "./submitButton/submitVerify";
 import { ProjectList, Project } from "./classes"
-import { appendProjectToList } from "./UIhandlers";
 import { handleAppendingProject } from "./loadpage";
 
 
@@ -38,3 +37,5 @@ export function handleProjectFormSubmition(e) {
     console.log("Could not handle project form submition");
     return undefined;
 }
+
+//Handles the creation of a new todo after clicking the submit button
