@@ -244,6 +244,7 @@ export const loadTodoForm = () => {
                             type: "checkbox",
                             required: true,
                             class: "todoinput",
+                            style: "cursor:pointer",
                         })
                     )
                 )
@@ -259,6 +260,7 @@ export const loadTodoForm = () => {
                             type: "checkbox",
                             required: true,
                             class: "todoinput",
+                            style: "cursor:pointer",
                         })
                     )
                 )
@@ -305,18 +307,20 @@ export const appendTodoToProject = (title, date, priority, completion) => {
             )
             .addChild(new Element('div')
                 .setAttributes({
-                    id:"tododelete"
+                    id: "tododelete"
                 })
                 .addChild(new Element('img')
                     .setAttributes({
                         src: "../assets/icons8-edit.svg",
-                        style: 'height:10%'
+                        // style: "height:10%;"
+                        style: "cursor:pointer",
                     })
                 )
-                .addChild(new Element('img')
+                .addChild(new Element("img")
                     .setAttributes({
                         src: "../assets/icons8-trash.svg",
-                        style: 'height:10%'
+                        // style: "height:10%"
+                        style: "cursor:pointer",
                     })
                 )
             )
