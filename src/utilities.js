@@ -1,6 +1,6 @@
 import { submitVerify } from "./submitButton/submitVerify";
-import { ProjectList, Project } from "./classes"
-import { handleAppendingProject } from "./loadpage";
+import { ProjectList, Project, Todo } from "./classes"
+import { handleAppendingProject, handleAppendingTodo } from "./loadpage";
 
 
 
@@ -39,3 +39,35 @@ export function handleProjectFormSubmition(e) {
 }
 
 //Handles the creation of a new todo after clicking the submit button
+export function handleTodoFormSubmition(e) {
+    if (submitVerify(e, ".todoinput")) {
+        //grabs the input values
+        const inputs = document.querySelectorAll(".todoinput");
+        const title = inputs[0].value.trim();
+        const date = inputs[1].value.trim();
+        const priority = inputs[2].checked;
+        const completion = inputs[3].checked;
+
+
+        //Creates a new project obj
+        const todo = new Todo(title, date);
+
+        //Apends to the dom
+        handleAppendingTodo(title, date, priority, completion);
+        //Need to fix.
+        //Project should be selected
+        //each project should have its own id
+        //Project selection from side bar
+        ProjectList.getProjectById(0).appendToDo(todo)
+
+        //handled the project form submitio
+        console.log("handled project form submition");
+        deleteForm();
+        return todo;
+    } else {
+
+    }
+
+    console.log("Could not handle project form submition");
+    return undefined;
+}

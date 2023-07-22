@@ -1,7 +1,7 @@
-import { format } from "date-fns";
+import { format, nextWednesday } from "date-fns";
 import { Element, Project, ProjectList, Todo } from "./classes";
 import { submitVerify } from "./submitButton/submitVerify";
-import { deleteForm } from "./utilities";
+import { deleteForm, handleTodoFormSubmition } from "./utilities";
 import { handleAppendingProjectForm, handleAppendingTodoForm } from "./loadpage";
 import { handleProjectFormSubmition } from "./utilities";
 
@@ -45,7 +45,8 @@ export const loadSidebar = () => {
             .addChild(new Element('img')
                 .setAttributes({
                     src: "../assets/icons8-plus.svg",
-                    style: "height:60%;"
+                    style: "height:60%;cursor: pointer;"
+
                 })
                 //Creates a new form when you click on the plus
                 .appendEventListener("click", handleAppendingProjectForm)
@@ -83,7 +84,8 @@ export const loadProjectForm = () => {
             .addChild(new Element('div')
                 .addChild(new Element('img')
                     .setAttributes({
-                        src: "../assets/icons8-close.svg"
+                        src: "../assets/icons8-close.svg",
+                        style: "cursor:pointer"
                     })
                     //Should delete the form div.... need to create a function that will delete form divs
                     .appendEventListener("click", () => deleteForm())
@@ -161,7 +163,7 @@ export function appendProjectToList(title, desc) {
                     .addChild(new Element('img')
                         .setAttributes({
                             src: "../assets/icons8-plus-black.svg",
-                            style: "height:50%;width:auto"
+                            style: "height:50%;width:auto;cursor:pointer"
                         })
                         .appendEventListener("click", (e) => handleAppendingTodoForm())
                     )
@@ -202,7 +204,7 @@ export const loadTodoForm = () => {
                 .addChild(new Element("img")
                     .setAttributes({
                         src: "../assets/icons8-close.svg",
-                        style: "height:20%"
+                        style: "height:20%;cursor:pointer"
                     })
                     .appendEventListener("click", (e) => deleteForm())
                 )
@@ -264,107 +266,67 @@ export const loadTodoForm = () => {
             .addChild(new Element('button')
                 .setTextContent("Create")
                 .setAttributes({ type: "submit", value: "submit" })
-                //.appendEventListener("click", (e) => handleAppendingTodoForm)
-                .appendEventListener("click", function (event) {
-                    console.log("Processing new todo for the project");
-                    if (submitVerify(event, ".todoinput")) {
-                        document.querySelector(".todoform").toggleAttribute("hidden");
-                        const inputs = document.querySelectorAll(".todoinput");
-                        const title = inputs[0].value.trim();
-                        const date = inputs[1].value.trim();
-                        const todo = new Todo(title, date);
-                        ProjectList.getProjectById(0).appendToDo(todo)
-                        //Creates a new dom element that holds the todo into the project 
-                        handleNewTodoIntoProject(title, date);
-
-                    }
-                }
-                )
+                .appendEventListener("click", (e) => handleTodoFormSubmition(e))
             )
             .buildElement();
     } else {
         return;
     }
-    // const prompt = new Element('div');
-    // prompt
-    //     .setAttributes({ class: "todoform", hidden: true })
-    //     .addChild(new Element('div')
-    //         .setTextContent("Name"))
-    //     .addChild(new Element('input')
-    //         .setAttributes({
-    //             type: "text",
-    //             required: true,
-    //             class: "todoinput",
-    //             placeholder: "Enter todo name"
-    //         }))
-    //     .addChild(new Element('div')
-    //         .setTextContent("Date"))
-    //     .addChild(new Element('input')
-    //         .setAttributes({
-    //             type: "date",
-    //             required: true,
-    //             class: "todoinput",
-    //             value: formatDate
-    //         }))
-    //     .addChild(new Element('div')
-    //         .addChild(new Element('div')
-    //             .addChild(new Element('div')
-    //                 .setTextContent("High Priority")
-    //                 .setAttributes({
-    //                     style: "font-size:1.5rem"
-    //                 }))
-    //             .addChild(new Element('input')
-    //                 .setAttributes({
-    //                     type: "checkbox",
-    //                     required: true,
-    //                     class: "todoinput",
-    //                 })))
-    //         .addChild(new Element('div')
-    //             .addChild(new Element('div')
-    //                 .setTextContent("Completion")
-    //                 .setAttributes({
-    //                     style: "font-size:1.5rem"
-    //                 }))
-    //             .addChild(new Element('input')
-    //                 .setAttributes({
-    //                     type: "checkbox",
-    //                     required: true,
-    //                     class: "todoinput",
-    //                 }))))
-    //     .addChild(new Element('button')
-    //         .setTextContent("Create")
-    //         .setAttributes({ type: "submit", value: "submit" })
-    //         .appendEventListener("click", function (event) {
-    //             console.log("Processing new todo for the project");
-    //             if (submitVerify(event, ".todoinput")) {
-    //                 document.querySelector(".todoform").toggleAttribute("hidden");
-    //                 const inputs = document.querySelectorAll(".todoinput");
-    //                 const title = inputs[0].value.trim();
-    //                 const date = inputs[1].value.trim();
-    //                 const todo = new Todo(title, date);
-    //                 ProjectList.getProjectById(0).appendToDo(todo)
-    //                 //Creates a new dom element that holds the todo into the project 
-    //                 handleNewTodoIntoProject(title, date);
-
-    //             }
-    //         }));
-    // const promptdom = prompt.buildElement();
-    // content.appendChild(promptdom);
 }
 
 //Creates a new dom element that holds the todo into the project 
-export const handleNewTodoIntoProject = (title, date) => {
-    const parent = document.querySelector("#list1");
-    const border = new Element('div')
-    border
-        .setAttributes({ id: "border" });
-    const container = new Element('div');
-    container
-        .addChild(new Element('div').setTextContent(title))
-        .addChild(new Element('span').setTextContent(date))
+export const appendTodoToProject = (title, date, priority, completion) => {
+    return new Element('div')
+        .setAttributes({
+            class: "todo"
+        })
+        .addChild(new Element('div')
+            .addChild(new Element('div')
+                .setAttributes({
+                    id: "todoname"
+                })
+                .addChild(new Element('input')
+                    .setAttributes({
+                        id: "todo-checkbox",
+                        type: "checkbox",
+                        checked: (completion === true),
+                    })
+                )
+                .addChild(new Element('span')
+                    .setTextContent(title)
+                )
 
-    const containerdom = container.buildElement();
-    const borderdom = border.buildElement();
-    parent.appendChild(containerdom);
-    parent.appendChild(borderdom)
+            )
+            .addChild(new Element('span')
+                .setTextContent(priority)
+            )
+            .addChild(new Element('span')
+                .setTextContent(date)
+            )
+            .addChild(new Element('div')
+                .setAttributes({
+                    id:"tododelete"
+                })
+                .addChild(new Element('img')
+                    .setAttributes({
+                        src: "../assets/icons8-edit.svg",
+                        style: 'height:10%'
+                    })
+                )
+                .addChild(new Element('img')
+                    .setAttributes({
+                        src: "../assets/icons8-trash.svg",
+                        style: 'height:10%'
+                    })
+                )
+            )
+
+
+        )
+
+        .addChild(new Element('div')
+            .setAttributes({ id: "border" })
+        )
+        .buildElement()
+
 }

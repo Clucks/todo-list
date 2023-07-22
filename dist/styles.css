@@ -166,8 +166,19 @@ body {
 }
 
 #project-header {
+    display: flex;
+    flex-direction: column;
+    background-color: #D9D9D9;
     padding: 1vh 3vw;
     margin: 4vh 0vw;
+}
+
+#project-header div:last-child {
+    font-size: 1.1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
 #project-title {
@@ -176,26 +187,6 @@ body {
     margin: 0px;
     padding: 0px;
     font-weight: 700;
-}
-
-#project div:first-child {
-    display: flex;
-    flex-direction: column;
-    background-color: #D9D9D9;
-}
-
-
-#project div div:nth-child(2) {
-    font-size: 1.1rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-
-}
-
-#border {
-    border-bottom: 1px solid #42A4EB;
 }
 
 
@@ -253,4 +244,71 @@ body {
 
 .todoinput.error {
     border: 1px solid red;
+}
+
+#project-todo {
+    background-color: #D9D9D9;
+    padding: 1vh 3vw;
+}
+
+.todo {
+    display: flex;
+    flex-direction: column;
+    padding: 2vh 0vw;
+
+}
+
+.todo div:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+#todo-checkbox[type="checkbox"] {
+    display: none;
+}
+
+
+/* Style for the unchecked state */
+#todo-checkbox[type="checkbox"]+span {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: #ccc;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Style for the checked state */
+#todo-checkbox[type="checkbox"]:checked+span {
+    background-color: #353535;
+    position: relative;
+}
+
+/* Add 'x' symbol to the checked state */
+#todo-checkbox[type="checkbox"]:checked+span::before {
+    content: 'x';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    color: #fff;
+}
+
+
+#tododelete {
+    height: fit-content;
+}
+
+#todoname {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#border {
+    border-bottom: 1px solid #42A4EB;
 }

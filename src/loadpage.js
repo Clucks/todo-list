@@ -1,4 +1,4 @@
-import { appendProjectToList, displayList, loadHeader, loadProjectForm, loadSidebar, loadTodoForm } from "./UIhandlers"
+import { appendProjectToList, appendTodoToProject, displayList, loadHeader, loadProjectForm, loadSidebar, loadTodoForm } from "./UIhandlers"
 
 const content = document.querySelector('#content')
 
@@ -23,7 +23,6 @@ export const handleAppendingProjectForm = () => {
 //Handles appending the project form
 export const handleAppendingProject = (title, desc) => {
     if (appendProjectToList(title, desc) !== undefined) {
-
         console.log("Handle appending project to dom");
         const project = appendProjectToList(title, desc);
         document.querySelector("#project-list").appendChild(project)
@@ -41,3 +40,8 @@ export const handleAppendingTodoForm = (event) => {
 }
 
 //Handles appending the todo to the project
+export const handleAppendingTodo = (title, date, priority, completion) => {
+    console.log("Handle appending todo to the project");
+    const todo = appendTodoToProject(title, date, priority, completion);
+    document.querySelector("#project-todo").appendChild(todo)
+}
