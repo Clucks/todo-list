@@ -31,16 +31,42 @@ export class Project {
   appendToDo(todo) {
     this._todos.push(todo);
   }
-}
-
-export class Todo {
-  constructor(title, date, priority) {
-    this.title = title;
-    this.date = date;
-    this.priority = priority;
+  get todos() {
+    return this._todos;
   }
 
 }
+
+export class Todo {
+  constructor(title, date, priority, completion) {
+    this._title = title;
+    this._date = date;
+    this._priority = priority;
+    this._completion = completion;
+  }
+
+  // Getter method for the title property
+  get title() {
+    return this._title;
+  }
+
+  // Getter method for the date property
+  get date() {
+    return this._date;
+  }
+
+  // Getter method for the priority property
+  get priority() {
+    return this._priority;
+  }
+
+  // Getter method for the completion property
+  get completion() {
+    return this._completion;
+  }
+}
+
+
 
 export class Element {
   constructor(elementType) {

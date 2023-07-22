@@ -1,7 +1,6 @@
-import { format, nextWednesday } from "date-fns";
-import { Element, Project, ProjectList, Todo } from "./classes";
-import { submitVerify } from "./submitButton/submitVerify";
-import { deleteForm, handleTodoFormSubmition } from "./utilities";
+import { format, } from "date-fns";
+import { Element, } from "./classes";
+import { deleteForm, handleTodoFormSubmition, editTodo, deleteTodo } from "./utilities";
 import { handleAppendingProjectForm, handleAppendingTodoForm } from "./loadpage";
 import { handleProjectFormSubmition } from "./utilities";
 
@@ -297,7 +296,6 @@ export const appendTodoToProject = (title, date, priority, completion) => {
                 .addChild(new Element('span')
                     .setTextContent(title)
                 )
-
             )
             .addChild(new Element('span')
                 .setTextContent(priority)
@@ -315,6 +313,7 @@ export const appendTodoToProject = (title, date, priority, completion) => {
                         // style: "height:10%;"
                         style: "cursor:pointer",
                     })
+                    .appendEventListener("click", (e) => editTodo())
                 )
                 .addChild(new Element("img")
                     .setAttributes({
@@ -322,15 +321,14 @@ export const appendTodoToProject = (title, date, priority, completion) => {
                         // style: "height:10%"
                         style: "cursor:pointer",
                     })
+                    .appendEventListener("click", (e) => deleteTodo(0, title))
                 )
             )
-
-
         )
-
         .addChild(new Element('div')
             .setAttributes({ id: "border" })
         )
         .buildElement()
 
 }
+

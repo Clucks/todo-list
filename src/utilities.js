@@ -1,6 +1,8 @@
 import { submitVerify } from "./submitButton/submitVerify";
 import { ProjectList, Project, Todo } from "./classes"
-import { handleAppendingProject, handleAppendingTodo } from "./loadpage";
+import { handleAppendingProject, handleAppendingTodo, handleAppendingTodoForm } from "./loadpage";
+import { appendProjectToList } from "./UIhandlers";
+import { compareAsc } from "date-fns";
 
 
 
@@ -50,7 +52,7 @@ export function handleTodoFormSubmition(e) {
 
 
         //Creates a new project obj
-        const todo = new Todo(title, date);
+        const todo = new Todo(title, date, priority, completion);
 
         //Apends to the dom
         handleAppendingTodo(title, date, priority, completion);
@@ -70,4 +72,40 @@ export function handleTodoFormSubmition(e) {
 
     console.log("Could not handle project form submition");
     return undefined;
+}
+
+//This function will clear all todos
+export function deleteAllTodos() {
+    document.querySelector("#project-todo").innerHTML = "";
+}
+
+//This function will append all todos in a project
+export function reloadAllTodos(project) {
+    const todosArray = ProjectList.getProjectById(0).todos;
+    todosArray.forEach(todo => {
+        handleAppendingTodo(todo.title, todo.date, todo.priority, todo.completion)
+    });
+
+
+}
+
+export function editTodo(todo) {
+    deleteTodo(1, todo);
+    handleAppendingTodoForm();
+    reloadAllTodos();
+}
+
+export function deleteTodo(targetProject, title) {
+    const foundIndex = ProjectList.getProjectById(0).todos
+        .findIndex(todo => todo.title === title);
+
+    if (foundIndex !== -1) {
+        ProjectList.getProjectById(0).todos.splice(foundIndex, 1);
+        console.log("Todo removed successfully.");
+        deleteAllTodos();
+        reloadAllTodos();
+    } else {
+        console.log("Todo not found.");
+    }
+
 }

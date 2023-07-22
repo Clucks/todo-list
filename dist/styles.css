@@ -246,6 +246,9 @@ body {
     border: 1px solid red;
 }
 
+#project-todo:empty {
+    padding:0;
+}
 #project-todo {
     background-color: #D9D9D9;
     padding: 1vh 3vw;
