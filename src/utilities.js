@@ -1,8 +1,6 @@
 import { submitVerify } from "./submitButton/submitVerify";
 import { ProjectList, Project, Todo } from "./classes"
 import { handleAppendingProject, handleAppendingTodo, handleAppendingTodoForm } from "./loadpage";
-import { appendProjectToList } from "./UIhandlers";
-import { compareAsc } from "date-fns";
 
 
 
@@ -75,7 +73,7 @@ export function handleTodoFormSubmition(e) {
 }
 
 //This function will clear all todos
-export function deleteAllTodos() {
+export function clearTodos() {
     document.querySelector("#project-todo").innerHTML = "";
 }
 
@@ -85,14 +83,14 @@ export function reloadAllTodos(project) {
     todosArray.forEach(todo => {
         handleAppendingTodo(todo.title, todo.date, todo.priority, todo.completion)
     });
-
-
 }
 
-export function editTodo(todo) {
-    deleteTodo(1, todo);
+export function editTodo(project, title) {
     handleAppendingTodoForm();
-    reloadAllTodos();
+    deleteTodo(project, title);
+    clearTodos(project, title);
+    reloadAllTodos(project);
+    console.log(ProjectList.getAllProjects());
 }
 
 export function deleteTodo(targetProject, title) {
@@ -102,7 +100,7 @@ export function deleteTodo(targetProject, title) {
     if (foundIndex !== -1) {
         ProjectList.getProjectById(0).todos.splice(foundIndex, 1);
         console.log("Todo removed successfully.");
-        deleteAllTodos();
+        clearTodos();
         reloadAllTodos();
     } else {
         console.log("Todo not found.");

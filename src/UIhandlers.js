@@ -298,7 +298,7 @@ export const appendTodoToProject = (title, date, priority, completion) => {
                 )
             )
             .addChild(new Element('span')
-                .setTextContent(priority)
+                .setTextContent(priority) 
             )
             .addChild(new Element('span')
                 .setTextContent(date)
@@ -313,7 +313,7 @@ export const appendTodoToProject = (title, date, priority, completion) => {
                         // style: "height:10%;"
                         style: "cursor:pointer",
                     })
-                    .appendEventListener("click", (e) => editTodo())
+                    .appendEventListener("click", (e) => editTodo(0, title))
                 )
                 .addChild(new Element("img")
                     .setAttributes({
