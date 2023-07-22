@@ -49,12 +49,6 @@ export const loadSidebar = () => {
                 })
                 //Creates a new form when you click on the plus
                 .appendEventListener("click", handleAppendingProjectForm)
-                //
-                //}
-                // .appendEventListener("click", function (event) {
-                //     event.preventDefault();
-                //     document.querySelector(".projectform").toggleAttribute('hidden');
-                // })
             )
         )
         .addChild(new Element('div')
@@ -64,7 +58,7 @@ export const loadSidebar = () => {
         )
         .addChild(new Element('div')
             .setAttributes({
-
+                id: "project-sidebar"
             })
         )
 
@@ -177,6 +171,24 @@ export function appendProjectToList(title, desc) {
     } else {
         return;
     }
+}
+
+//Adds a new tab to the side bar for the project
+export const loadProjectTabToSidebar = (title) => {
+    return new Element('div')
+        .setAttributes({
+            id: "projecttab"
+        })
+        .addChild(new Element('span')
+            .setTextContent(title)
+        )
+        .addChild(new Element('img')
+            .setAttributes({
+                src: "../assets/icons8-close.svg",
+                style: "height:60%"
+            })
+        )
+        .buildElement();
 }
 
 //Loads the dom to display projects and todos
@@ -298,7 +310,7 @@ export const appendTodoToProject = (title, date, priority, completion) => {
                 )
             )
             .addChild(new Element('span')
-                .setTextContent(priority) 
+                .setTextContent(priority)
             )
             .addChild(new Element('span')
                 .setTextContent(date)
