@@ -1,6 +1,7 @@
 import { submitVerify } from "./submitButton/submitVerify";
 import { ProjectList, Project } from "./classes"
 import { appendProjectToList } from "./UIhandlers";
+import { handleAppendingProject } from "./loadpage";
 
 
 
@@ -22,8 +23,8 @@ export function handleProjectFormSubmition(e) {
         //Creates a new project obj
         const project = new Project(title, desc);
 
-        //Apends to 
-        appendProjectToList(title, desc);
+        //Apends to the dom
+        handleAppendingProject(title, desc);
         ProjectList.addProject(project)
 
         //handled the project form submitio
