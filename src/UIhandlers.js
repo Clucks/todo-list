@@ -3,6 +3,7 @@ import { Element, Project, ProjectList, Todo } from "./classes";
 import { submitVerify } from "./submitButton/submitVerify";
 import { deleteForm } from "./utilities";
 import { handleAppendingProjectForm } from "./loadpage";
+import { handleProjectFormSubmition } from "./utilities";
 
 //Loads the initial DOM of the todo list
 const content = document.querySelector('#content');
@@ -108,29 +109,29 @@ export const loadProjectForm = () => {
             .addChild(new Element('button')
                 .setTextContent("Create")
                 .setAttributes({ type: "submit", value: "submit" })
-                .appendEventListener("click", function (event) {
-                    if (submitVerify(event, ".projectinput")) {
-                        document.querySelector(".projectform").toggleAttribute("hidden");
-                        const inputs = document.querySelectorAll(".projectinput");
-                        const title = inputs[0].value.trim();
-                        const desc = inputs[1].value.trim();
-                        const project = new Project(title, desc);
-                        appendProjectToList(title, desc);
-                        ProjectList.addProject(project)
-                    }
-                })
+                //function deletes old form 
+                .appendEventListener("click", (e) => handleProjectFormSubmition(e))
+                // .appendEventListener("click", function (event) {
+                //     if (submitVerify(event, ".projectinput")) {
+                //         document.querySelector(".projectform").toggleAttribute("hidden");
+                //         const inputs = document.querySelectorAll(".projectinput");
+                //         const title = inputs[0].value.trim();
+                //         const desc = inputs[1].value.trim();
+                //         const project = new Project(title, desc);
+                //         appendProjectToList(title, desc);
+                //         ProjectList.addProject(project)
+                //     }
+                // })
             )
             .buildElement();
 
     } else {
         return;
     }
-    const prompt = new Element('div');
-
 }
 
 //Function to append project to displayList
-function appendProjectToList(title, desc) {
+export function appendProjectToList(title, desc) {
     const parent = document.querySelector("#project-list");
     const container = new Element('div');
     container

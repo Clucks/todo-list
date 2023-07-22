@@ -12,7 +12,11 @@ export const loadpage = () => {
 }
 
 export const handleAppendingProjectForm = () => {
+    
+    if (loadProjectForm() !== undefined) {
     console.log("Handle appending project form");
-    const form = loadProjectForm();
-    content.appendChild(form)
+        const form = loadProjectForm();
+        content.appendChild(form)
+    }
+    console.log("Form already created");
 }
