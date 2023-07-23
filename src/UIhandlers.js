@@ -1,6 +1,12 @@
 import { format, } from "date-fns";
 import { Element, } from "./classes";
-import { deleteForm, handleTodoFormSubmition, editTodo, deleteTodo } from "./utilities";
+import {
+    deleteForm,
+    handleTodoFormSubmition,
+    editTodo,
+    deleteTodo,
+    checkCompletion
+} from "./utilities";
 import { handleAppendingProjectForm, handleAppendingTodoForm } from "./loadpage";
 import { handleProjectFormSubmition } from "./utilities";
 
@@ -109,17 +115,6 @@ export const loadProjectForm = () => {
                 .setAttributes({ type: "submit", value: "submit" })
                 //function deletes old form 
                 .appendEventListener("click", (e) => handleProjectFormSubmition(e))
-                // .appendEventListener("click", function (event) {
-                //     if (submitVerify(event, ".projectinput")) {
-                //         document.querySelector(".projectform").toggleAttribute("hidden");
-                //         const inputs = document.querySelectorAll(".projectinput");
-                //         const title = inputs[0].value.trim();
-                //         const desc = inputs[1].value.trim();
-                //         const project = new Project(title, desc);
-                //         appendProjectToList(title, desc);
-                //         ProjectList.addProject(project)
-                //     }
-                // })
             )
             .buildElement();
 
@@ -181,12 +176,14 @@ export const loadProjectTabToSidebar = (title) => {
         })
         .addChild(new Element('span')
             .setTextContent(title)
+            .appendEventListener("click", (e) => handleProjectSwitch(title))
         )
         .addChild(new Element('img')
             .setAttributes({
                 src: "../assets/icons8-close.svg",
                 style: "height:60%"
             })
+            .appendEventListener("click", (e) => deleteProject())
         )
         .buildElement();
 }
@@ -304,6 +301,7 @@ export const appendTodoToProject = (title, date, priority, completion) => {
                         type: "checkbox",
                         checked: (completion === true),
                     })
+                    .appendEventListener("click", () => checkCompletion(title))
                 )
                 .addChild(new Element('span')
                     .setTextContent(title)

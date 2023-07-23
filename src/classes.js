@@ -12,20 +12,33 @@ export class ProjectList {
   static deleteProject(project) {
     ProjectList.projectsArray.splice(Librarian.projectsArray.indexOf(project), 1);
   }
-  static getProjectById(id) {
-    return ProjectList.projectsArray.find(project => project._id === id);
+  static getProjectByName(title) {
+    return ProjectList.projectsArray.find(project => project._name === title);
   }
+
+  static getProjectByCurrent() {
+    return ProjectList.projectsArray.find(project => project._current === true);
+  }
+
 
 }
 
 export class Project {
-  static counter = 0;
-  constructor(name, desc) {
+  constructor(name, desc, current) {
     this._name = name;
     this._desc = desc;
-    this._todos = [];
+    this._current = current;
+    this._todos = []
     this._id = Project.counter;
-    Project.counter++;
+
+  }
+  getTodoByName(title) {
+    for (const todo of this._todos) {
+      if (todo._title === title) {
+        return todo;
+      }
+    }
+    return undefined; // If todo with given title is not found
   }
 
   appendToDo(todo) {
@@ -34,8 +47,19 @@ export class Project {
   get todos() {
     return this._todos;
   }
+  get desc() {
+    return this._desc;
+  }
 
+  get current() {
+    return this._current
+  }
+
+  set current(value) {
+    this._current = value;
+  }
 }
+
 
 export class Todo {
   constructor(title, date, priority, completion) {
@@ -61,8 +85,8 @@ export class Todo {
   }
 
   // Getter method for the completion property
-  get completion() {
-    return this._completion;
+  toggleCompletion() {
+    this._completion = !this._completion;
   }
 }
 
