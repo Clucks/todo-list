@@ -10,8 +10,9 @@ export class ProjectList {
   }
 
   static deleteProject(project) {
-    ProjectList.projectsArray.splice(Librarian.projectsArray.indexOf(project), 1);
+    ProjectList.projectsArray.splice(ProjectList.projectsArray.indexOf(project), 1);
   }
+
   static getProjectByName(title) {
     return ProjectList.projectsArray.find(project => project._name === title);
   }
@@ -29,8 +30,6 @@ export class Project {
     this._desc = desc;
     this._current = current;
     this._todos = []
-    this._id = Project.counter;
-
   }
   getTodoByName(title) {
     for (const todo of this._todos) {
@@ -43,6 +42,9 @@ export class Project {
 
   appendToDo(todo) {
     this._todos.push(todo);
+  }
+  get name() {
+    return this._name;
   }
   get todos() {
     return this._todos;

@@ -5,8 +5,45 @@ import {
     handleAppendingTodo,
     handleAppendingTodoForm,
     reloadAllTodos,
+    handleProjectsTab
 } from "./loadpage";
 
+
+export function printAllProjects() {
+    const projects = ProjectList.getAllProjects();
+
+    console.log('--- All Projects ---');
+    projects.forEach((project, index) => {
+        console.log(`Project ${index + 1}:`);
+        console.log(`Title: ${project._name}`);
+        console.log(`Description: ${project._desc}`);
+        console.log('Todos:');
+        project._todos.forEach((todo, todoIndex) => {
+            console.log(`  Todo ${todoIndex + 1}:`);
+            console.log(`  Title: ${todo._title}`);
+            console.log(`  Date: ${todo._date}`);
+            console.log(`  Priority: ${todo._priority}`);
+            console.log(`  Completion: ${todo._completion}`);
+        });
+        console.log('-------------------');
+    });
+}
+
+export function changeCurrentProject(title) {
+    const allProjects = ProjectList.getAllProjects();
+
+    // Find the current project and change its _current value to false
+    const currentProject = allProjects.find(project => project._current === true);
+    if (currentProject) {
+        currentProject.current = false;
+    }
+
+    // Find the project with the given title and change its _current value to true
+    const newCurrentProject = allProjects.find(project => project._name === title);
+    if (newCurrentProject) {
+        newCurrentProject.current = true;
+    }
+}
 
 
 //This function will delete the existing form.
@@ -16,7 +53,10 @@ export function deleteForm() {
 }
 
 export function deleteProjectList() {
-    document.querySelector('#project-list').innerHTML = "";
+    const projectList = document.querySelector('#project-list');
+    while (projectList.firstChild) {
+        projectList.removeChild(projectList.firstChild);
+    }
 }
 
 //Handles the creation of a new project after clicking the submit button
@@ -124,5 +164,12 @@ export function checkCompletion(title) {
 
 
 //This function will delete a project
+export function deleteProject(title) {
+    console.log("Deleting a project from the side bar");
+    deleteProjectList();
+    const project = ProjectList.getProjectByName(title)
+    ProjectList.deleteProject(project);
 
-// const desc = ProjectList.getProjectByName(title).desc();
+    document.querySelector("#project-sidebar").innerHTML = "";
+    handleProjectsTab();
+}

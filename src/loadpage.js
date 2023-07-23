@@ -9,7 +9,7 @@ import {
     loadSidebar,
     loadTodoForm
 } from "./UIhandlers"
-import { deleteProjectList } from "./utilities";
+import { changeCurrentProject, deleteProjectList, printAllProjects } from "./utilities";
 
 const content = document.querySelector('#content')
 
@@ -59,11 +59,28 @@ export const handleAppendingTodo = (title, date, priority, completion) => {
     document.querySelector("#project-todo").appendChild(todo)
 }
 
-const handleProjectTab = (title) => {
+export const handleProjectTab = (title) => {
     console.log("Handling appending project to sidebar");
-    const tab = loadProjectTabToSidebar(title);
-    document.querySelector("#project-sidebar").appendChild(tab)
+    const allProjects = ProjectList.getAllProjects();
+    const existingProject = allProjects.find(project => project.name === title);
 
+    if (!existingProject) {
+        console.log("Handling appending project to sidebar");
+        console.log("title:" + title);
+        const tab = loadProjectTabToSidebar(title);
+        document.querySelector("#project-sidebar").appendChild(tab)
+    } else {
+        console.log("handleprojecttab failed");
+    }
+};
+
+export const handleProjectsTab = () => {
+    const allProjects = ProjectList.getAllProjects();
+    allProjects.forEach(project => {
+        const tab = loadProjectTabToSidebar(project.name);
+        document.querySelector("#project-sidebar").appendChild(tab)
+    });
+    printAllProjects()
 }
 //This function will append all todos in a project
 export function reloadAllTodos() {
@@ -74,15 +91,15 @@ export function reloadAllTodos() {
 }
 
 export const handleProjectSwitch = (title) => {
+    console.log("Handling project switch");
     //Clean the main container
     deleteProjectList();
     //append header
-    const project = ProjectList.getProjectByCurrent
-    (title);
+    const project = ProjectList.getProjectByName(title);
+    changeCurrentProject(title)
 
     handleAppendingProject(title, project.desc);
     //append todos
     reloadAllTodos(project)
-
-
+    printAllProjects();
 }

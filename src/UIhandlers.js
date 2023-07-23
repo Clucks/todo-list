@@ -5,9 +5,15 @@ import {
     handleTodoFormSubmition,
     editTodo,
     deleteTodo,
-    checkCompletion
+    checkCompletion,
+    deleteProject
 } from "./utilities";
-import { handleAppendingProjectForm, handleAppendingTodoForm } from "./loadpage";
+import {
+    handleAppendingProjectForm,
+    handleAppendingTodoForm,
+    handleProjectSwitch,
+
+} from "./loadpage";
 import { handleProjectFormSubmition } from "./utilities";
 
 //Loads the initial DOM of the todo list
@@ -183,7 +189,7 @@ export const loadProjectTabToSidebar = (title) => {
                 src: "../assets/icons8-close.svg",
                 style: "height:60%"
             })
-            .appendEventListener("click", (e) => deleteProject())
+            .appendEventListener("click", (e) => deleteProject(title))
         )
         .buildElement();
 }
@@ -299,7 +305,7 @@ export const appendTodoToProject = (title, date, priority, completion) => {
                     .setAttributes({
                         id: "todo-checkbox",
                         type: "checkbox",
-                        checked: (completion === true),
+                        checked: (completion),
                     })
                     .appendEventListener("click", () => checkCompletion(title))
                 )
